@@ -13,7 +13,7 @@ guard :shell do
   watch('.guard_result') { @blinky_tape.set_status! }
 
   callback(:start_begin) {
-    @blinky_tape = BlinkyTapeTestStatus::Guard.new :filename => File.expand_path('.guard_result'), :tty => ENV['BLINKY_TTY']
+    @blinky_tape = BlinkyTapeTestStatus::Guard.new :filename => File.expand_path('.guard_result')
     @blinky_tape.rainbow!
   }
   callback(:reload_begin) { @blinky_tape.rainbow! }
@@ -26,7 +26,7 @@ guard :rspec do
 
   callback(:run_all_begin) { @blinky_tape.pulse! }
   callback(:run_all_end) { @blinky_tape.set_status! }
-  callback(:run_on_changes_begin) { @blinky_tape.flash! }
-  callback(:run_on_changes_end) { @blinky_tape.set_status! }
+  callback(:run_on_modifications_begin) { @blinky_tape.flash! }
+  callback(:run_on_modifications_end) { @blinky_tape.set_status! }
 end
 
